@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portfolio Jeune Développeur</title>
+<style>
+  /* Reset and base */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f9ff;
+    color: #1e2a38;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  /* Header and Navigation */
+  header {
+    background: #004aad;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 8px rgba(0, 74, 173, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+  }
+  nav a {
+    color: #e0eefd;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    position: relative;
+    padding: 0.3rem 0;
+    transition: color 0.3s ease;
+  }
+  nav a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffd166;
+    transition: width 0.3s ease;
+  }
+  nav a:hover,
+  nav a:focus {
+    color: #ffd166;
+  }
+  nav a:hover::after,
+  nav a:focus::after {
+    width: 100%;
+  }
+
+  /* Main container */
+  main {
+    flex-grow: 1;
+    max-width: 900px;
+    margin: 3rem auto 4rem;
+    padding: 0 1rem;
+  }
+
+  /* Section styles */
+  section {
+    margin-bottom: 5rem;
+  }
+  h1, h2 {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #003d82;
+  }
+  h1 {
+    font-size: 2.5rem;
+    text-align: center;
+  }
+  h2 {
+    font-size: 1.8rem;
+    border-bottom: 3px solid #ffd166;
+    display: inline-block;
+    padding-bottom: 0.3rem;
+  }
+  p {
+    font-size: 1.1rem;
+    color: #374151;
+    max-width: 650px;
+  }
+
+  /* About Section */
+  #about {
+    text-align: center;
+  }
+  #about img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #004aad;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 14px rgba(0, 74, 173, 0.3);
+  }
+
+  /* Skills Section */
+  #skills ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    max-width: 700px;
+    margin: 1rem auto 0;
+  }
+  #skills li {
+    background: #004aad;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border-radius: 24px;
+    font-weight: 600;
+    box-shadow: 0 3px 8px rgba(0, 74, 173, 0.4);
+    transition: background-color 0.3s ease;
+    cursor: default;
+  }
+  #skills li:hover {
+    background: #ffd166;
+    color: #004aad;
+  }
+
+  /* Projects Section */
+  #projects .project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .project-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 74, 173, 0.3);
+  }
+  .project-image {
+    height: 140px;
+    background-size: cover;
+    background-position: center;
+  }
+  .project-content {
+    padding: 1rem 1.5rem 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .project-title {
+    font-size: 1.3rem;
+    color: #004aad;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+  }
+  .project-desc {
+    flex-grow: 1;
+    color: #4b5563;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  .project-links {
+    margin-top: auto;
+  }
+  .project-links a {
+    color: #004aad;
+    margin-right: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom-color 0.3s ease;
+  }
+  .project-links a:hover,
+  .project-links a:focus {
+    border-bottom-color: #ffd166;
+  }
+
+  /* Contact Section */
+  #contact {
+    text-align: center;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  #contact p {
+    margin-bottom: 1.5rem;
+  }
+  #contact a {
+    color: #004aad;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom-color 0.3s ease;
+  }
+  #contact a:hover,
+  #contact a:focus {
+    border-bottom-color: #ffd166;
+  }
+
+  /* Footer */
+  footer {
+    background: #004aad;
+    color: #e0eefd;
+    text-align: center;
+    padding: 1.2rem 1rem;
+    font-size: 0.9rem;
+    margin-top: auto;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    header {
+      padding: 1rem;
+    }
+    nav {
+      gap: 1rem;
+    }
+    h1 {
+      font-size: 2rem;
+    }
+    #skills ul {
+      gap: 0.6rem;
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <nav aria-label="Navigation principale">
+    <a href="#about">À propos</a>
+    <a href="#skills">Compétences</a>
+    <a href="#projects">Projets</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <section id="about" tabindex="0">
+    <img src="https://i.pravatar.cc/130?img=5" alt="Photo de profil du développeur" />
+    <h1>Bonjour, je suis Lucas Martin</h1>
+    <p>Jeune développeur passionné avec un fort intérêt pour le développement web moderne. J'aime créer des expériences utilisateur intuitives et performantes.</p>
+  </section>
+
+  <section id="skills" tabindex="0">
+    <h2>Compétences</h2>
+    <ul>
+      <li>HTML5 &amp; CSS3</li>
+      <li>JavaScript (ES6+)</li>
+      <li>React.js</li>
+      <li>Node.js</li>
+      <li>Git &amp; GitHub</li>
+      <li>REST APIs</li>
+      <li>Responsive Design</li>
+      <li>SQL &amp; NoSQL</li>
+    </ul>
+  </section>
+
+  <section id="projects" tabindex="0">
+    <h2>Projets</h2>
+    <div class="project-list">
+      <article class="project-card" tabindex="0" aria-label="Projet Portfolio Personnel">
+        <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80');"></div>
+        <div class="project-content">
+          <h3 class="project-title">Portfolio Personnel</h3>
+          <p class="project-desc">Un site web responsive présentant mes compétences, projets et contact. Développé avec React, HTML5, et CSS3.</p>
+          <div class="project-links">
+            <a href="https://github.com/lucasmartin/portfolio" target="_blank" rel="noopener noreferrer">Code</a>
+            <a href="https://lucasmartin.dev" target="_blank" rel="noopener noreferrer">Live</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card" tabindex="0" aria-label="Projet Todo List Dynamique">
+        <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1517430816045-df4b7de2dc6d?auto=format&fit=crop&w=600&q=80');"></div>
+        <div class="project-content">
+          <h3 class="project-title">Todo List Dynamique</h3>
+          <p class="project-desc">Application de gestion des tâches simple et intuitive construite en JavaScript vanilla avec stockage local.</p>
+          <div class="project-links">
+            <a href="https://github.com/lucasmartin/todolist" target="_blank" rel="noopener noreferrer">Code</a>
+            <a href="https://lucasmartin.dev/todolist" target="_blank" rel="noopener noreferrer">Live</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="project-card" tabindex="0" aria-label="Projet Blog Minimaliste">
+        <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=600&q=80');"></div>
+        <div class="project-content">
+          <h3 class="project-title">Blog Minimaliste</h3>
+          <p class="project-desc">Plateforme de blog simple avec interface épurée. Utilisant React et JSON pour le contenu dynamique.</p>
+          <div class="project-links">
+            <a href="https://github.com/lucasmartin/minimalblog" target="_blank" rel="noopener noreferrer">Code</a>
+            <a href="https://lucasmartin.dev/minimalblog" target="_blank" rel="noopener noreferrer">Live</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="contact" tabindex="0">
+    <h2>Contactez-moi</h2>
+    <p>Vous pouvez me joindre via :</p>
+    <p>Email : <a href="mailto:lucas.martin.dev@gmail.com">lucas.martin.dev@gmail.com</a></p>
+    <p>Téléphone : <a href="tel:+33612345678">+33 6 12 34 56 78</a></p>
+    <p>Ou sur <a href="https://www.linkedin.com/in/lucasmartin" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+  </section>
+</main>
+
+<footer>
+  &copy; 2024 Lucas Martin - Tous droits réservés.
+</footer>
+</body>
+</html>
+
